@@ -10,17 +10,17 @@ Javadocs : [CLICK ME](https://jitpack.io/com/github/Grover-c13/PokeGOAPI-Java/a2
 See this guide for adding functionality:
    https://docs.google.com/document/d/1BE8O6Z19sQ54T5T7QauXgA11GbL6D9vx9AAMCM5KlRA
 
-See this spreadsheet for RPC endpoints and progress :
+See this spreadsheet for RPC endpoints and progress:
    https://docs.google.com/spreadsheets/d/1Xv0Gw5PzIRaVou2xrl6r7qySrcmOKjQWLBjJA73YnJM
 
 ___
 :exclamation: :exclamation: :exclamation:
 
-This API may have issues when the PokemonGO servers are under high load or down, in this case please wait for the official to get back up. You can check the official servers status on [IsPokemonGoDownOrNot.com](http://ispokemongodownornot.com) or [MMOServerStatus.com](http://www.mmoserverstatus.com/pokemon_go).
+This API may have issues when the Pokemon GO servers are under high load or down, in this case please wait for the official to get back up. You can check the official servers status on [IsPokemonGoDownOrNot.com](http://ispokemongodownornot.com) or [MMOServerStatus.com](http://www.mmoserverstatus.com/pokemon_go).
 
-This API doesnt fake the official client perfectly, niantic may know that you aren't using the official app, we encourage you to use an alternate account to play with this API.
+This API doesn’t emulate the official Pokemon GO client perfectly, and Niantic may know you are not using the official client. Using a dummy test account is recommended.
 
-If you are using this lib to catch pokemon and loot pokestop, take care that you aren't teleporting, the servers may issue a softban against your client (its temporary, between 10 and 30 minutes in general).
+If you are using this library to catch Pokemon and loot PokeStop, make sure that you aren't teleporting, the servers may issue a soft ban against your account (its temporary, between 10 and 30 minutes in general).
 
 :exclamation: :exclamation: :exclamation:
 ___
@@ -67,29 +67,29 @@ Import JAR in Eclipse
   - Clone the repo and cd into the folder
   - `` git submodule update --init ``
   - `` ./gradlew :library:build ``
-  - you should have the api jar in ``library/build/libs/PokeGOAPI-library-all-0.X.X.jar``
+  - you should have the API jar in ``library/build/libs/PokeGOAPI-library-all-0.X.X.jar``
       - (0.X.X refers to the version number provided in the JAR filename, ie. 0.3.0)
 
-PS : for users who want to import the api into Eclipse IDE, you'll need to :
+PS: for users who want to import the API into Eclipse IDE, you'll need to :
   - build once : `` ./gradlew :library:build ``
   - Right click on the project
   - Select Build path > Configure Build Path > Source > Add Folder
   - Select `library/build/generated/source/proto/main/java`
   - Finish
 
-# Usage example (mostly how to login) :
+# Usage example (mostly how to login):
 ```java
 OkHttpClient httpClient = new OkHttpClient();
 
 /** 
 * Google: 
 * You will need to redirect your user to GoogleUserCredentialProvider.LOGIN_URL
-* Afer this, the user must signin on google and get the token that will be show to him.
+* After this, the user must sign in on google and get the token that will be show to him.
 * This token will need to be put as argument to login.
 */
 GoogleUserCredentialProvider provider = new GoogleUserCredentialProvider(http);
 
-// in this url, you will get a code for the google account that is logged
+// in this URL, you will get a code for the google account that is logged
 System.out.println("Please go to " + GoogleUserCredentialProvider.LOGIN_URL);
 System.out.println("Enter authorization code:");
 			
@@ -105,8 +105,8 @@ go.login(provider);
 /**
 * After this, if you do not want to re-authorize the google account every time, 
 * you will need to store the refresh_token that you can get the first time with provider.getRefreshToken()
-* ! The API does not store the refresh token for you !
-* log in using the refresh token like this :
+* ! The API does not store the refresh token for you!
+* log in using the refresh token like this:
 */
 PokemonGo go = new PokemonGo(httpClient);
 go.login(new GoogleUserCredentialProvider(httpClient, refreshToken));
@@ -115,12 +115,12 @@ go.login(new GoogleUserCredentialProvider(httpClient, refreshToken));
 * PTC is much simpler, but less secure.
 * You will need the username and password for each user log in
 * This account does not currently support a refresh_token. 
-* Example log in :
+* Login Example:
 */
 PokemonGo go = new PokemonGo(httpClient);
 go.login(new PtcCredentialProvider(httpClient, username, password));
 
-// After this you can access the api from the PokemonGo instance :
+// After this you can access the api from the PokemonGo instance:
 go.getPlayerProfile(); // to get the user profile
 go.getInventories(); // to get all his inventories (Pokemon, backpack, egg, incubator)
 go.setLocation(lat, long, alt); // set your position to get stuff around (altitude is not needed, you can use 1 for example)
@@ -134,7 +134,7 @@ LevelUpRewardsMessage msg = LevelUpRewardsMessage.newBuilder().setLevel(yourLVL)
 ServerRequest serverRequest = new ServerRequest(RequestType.LEVEL_UP_REWARDS, msg);
 go.getRequestHandler().sendServerRequests(serverRequest);
 
-// and get the response like this :
+// and get the response like this:
 
 LevelUpRewardsResponse response = null;
 try {
@@ -216,3 +216,4 @@ You can't. The Google Identity Platform uses the SHA1 fingerprint and package na
   - @LoungeKatt
 
 You can join us in the slack channel #javaapi on the pkre.slack.com ([you can get invited here](https://shielded-earth-81203.herokuapp.com/))
+
