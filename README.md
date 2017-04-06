@@ -16,11 +16,11 @@ See this spreadsheet for RPC endpoints and progress:
 ___
 :exclamation: :exclamation: :exclamation:
 
-This API may have issues when the Pokemon GO servers are under high load or down, in this case please wait for the official to get back up. You can check the official servers status on [IsPokemonGoDownOrNot.com](http://ispokemongodownornot.com) or [MMOServerStatus.com](http://www.mmoserverstatus.com/pokemon_go).
+This API may have issues when the Pokemon GO servers are under high load or down. In this case, please wait for the official to get back up. You can check the official servers status on [IsPokemonGoDownOrNot.com](http://ispokemongodownornot.com) or [MMOServerStatus.com](http://www.mmoserverstatus.com/pokemon_go).
 
-This API doesn’t emulate the official Pokemon GO client perfectly, and Niantic may know you are not using the official client. Using a dummy test account is recommended.
+This API doesn’t emulate the official Pokemon GO client perfectly. Niantic may know you are not using the official client. Using an alternate account is recommended.
 
-If you are using this library to catch Pokemon and loot PokeStop, make sure that you aren't teleporting, the servers may issue a soft ban against your account (its temporary, between 10 and 30 minutes in general).
+If you are using this library to catch Pokemon and loot PokeStop, taking notice that you aren't teleporting. The servers may issue a soft-ban to against your account (its temporary, between 10 and 30 minutes generally).
 
 :exclamation: :exclamation: :exclamation:
 ___
@@ -93,7 +93,7 @@ GoogleUserCredentialProvider provider = new GoogleUserCredentialProvider(http);
 System.out.println("Please go to " + GoogleUserCredentialProvider.LOGIN_URL);
 System.out.println("Enter authorization code:");
 			
-// Ask the user to enter it in the standard input
+// Ask the user to enter it into the standard input
 Scanner sc = new Scanner(System.in);
 String access = sc.nextLine();
 			
@@ -120,7 +120,7 @@ go.login(new GoogleUserCredentialProvider(httpClient, refreshToken));
 PokemonGo go = new PokemonGo(httpClient);
 go.login(new PtcCredentialProvider(httpClient, username, password));
 
-// After this you can access the api from the PokemonGo instance:
+// After this you can access to the api from the PokemonGo instance:
 go.getPlayerProfile(); // to get the user profile
 go.getInventories(); // to get all his inventories (Pokemon, backpack, egg, incubator)
 go.setLocation(lat, long, alt); // set your position to get stuff around (altitude is not needed, you can use 1 for example)
@@ -140,7 +140,7 @@ LevelUpRewardsResponse response = null;
 try {
 	response = LevelUpRewardsResponse.parseFrom(serverRequest.getData());
 } catch (InvalidProtocolBufferException e) {
-	// its possible that the parsing fail when servers are in high load for example.
+	// it's possible that the parsing fail when servers are in high load for example.
 	throw new RemoteServerException(e);
 }
 ```
@@ -181,13 +181,13 @@ options.noMasterBall(true);
 cp.catchPokemon(options);
 ```
 
-Each option has a default and the most relevant option will override others with similar functionality (for example, usePokeBall will set the minimum of useBestBall, a maximum by using it alone, or the specific value with noFallback). See the javadocs for more info.
+Each option has a default and the most relevant option will override others with similar functionalities (for example, usePokeBall will set the minimum of useBestBall, a maximum by using it alone, or the specific value with noFallback). See the javadocs for more information.
 
 ##Android Dev FAQ
 
   - I can't use the sample code! It just throws a login exception!
 
-You're running the sample code on the UI thread. Strict mode policy will throw an exception in that case and its being caught by the network client and treating it as a login failed exception. Run the sample code on a background thread in AsyncTask or RXJava and it will work.
+You're running the sample code on the UI thread. Strict mode policy will throw an exception in that case and it is being caught by the network client and treating it as a login failed exception. Run the sample code on a background thread in AsyncTask or RXJava and it will work.
 
   - I want to submit a refactor so that this library will use Google Volley
 
